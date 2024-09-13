@@ -1,0 +1,7 @@
+
+<ng-content select=".heading"></ng-content>
+<div *ngFor="let pro of products">
+    {{ pro.name}}
+    {{ pro.price}}
+</div>
+<ng-content select=".readMore"></ng-content>

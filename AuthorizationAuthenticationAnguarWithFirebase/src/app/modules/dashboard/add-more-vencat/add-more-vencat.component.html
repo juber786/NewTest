@@ -1,0 +1,43 @@
+<div>
+
+   <form [formGroup]="employeeForm" (ngSubmit)="onSubmt()">
+     <div style="margin-top: 25px;margin-bottom: 25px;">
+        <label>Employee Name</label>
+        <input formControlName="employeeName" (blur)="logValidationForm()" type="text">
+        <span class="help-block" *ngIf="formErrors.employeeName">
+          {{formErrors.employeeName}}
+        </span>
+     </div>
+     <!-- Form from array we need to show message static -->
+     <div formArrayName="skillsSet" *ngFor="let skills of employeeForm.controls.skillsSet['controls']; let i = index">
+       <div [formGroupName]="i">
+          <div style="margin-bottom: 10px; display: inline-block;">
+            <label>Skill</label>
+            <input formControlName="skill"   [id]="'skill'+ i" type="text">
+            <span class="help-block" *ngIf="skills.get('skill').errors?.required && skills.get('skill').touched">
+              Skill Required
+            </span>
+          </div>
+          <div  style="margin-bottom: 10px; display: inline-block;">
+            <label>Experience</label>
+            <input formControlName="exp" [id]="'skill'+ i"  type="text">
+            <span class="help-block" *ngIf="skills.get('exp').errors?.required && skills.get('exp').touched">
+              Exp Required
+            </span>
+          </div>
+          <div style="margin-bottom: 10px; display: inline-block;" *ngIf="employeeForm.get('skillsSet').length > 1">
+              <button (click)="removeSkill(i)">Remove Skill</button>
+          </div>
+       </div>
+
+     </div>
+     <div style="margin-bottom: 10px;">
+      <button (click)="addSkills()" >Add Skill</button>
+
+
+     </div>
+     <div>
+       <button class="submitBut"> Submit</button>
+     </div>
+   </form>
+</div>

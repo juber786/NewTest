@@ -1,0 +1,35 @@
+
+<p *ngIf="error" style="color: #ff0000;">Error : {{error}} </p>
+<p>SignUp</p>
+&nbsp;
+<form #signUpForm='ngForm' (ngSubmit)="signUp(signUpForm.value)">
+  <div>
+     <span>Email</span>
+     <input type="text" required name="email" id="email" ngModel #emailC='ngModel'>
+     <span *ngIf="emailC.touched && emailC.invalid">Username Required</span>
+  </div>
+  <div>
+    <span>Password </span>
+    <input type="text" required name="password" id="password" ngModel #passwordC='ngModel'>
+    <span *ngIf="passwordC.touched && passwordC.invalid">Password Requrired</span>
+  </div>
+  <button type="submit">SignUp</button>
+</form>
+
+
+
+<p>LOGIN</p>
+&nbsp;
+<form #signInForm='ngForm' (ngSubmit)="signIn(signInForm.value)">
+  <div>
+     <span>Email</span>
+     <input type="text" required name="email" id="email" ngModel #emailI='ngModel'>
+     <span *ngIf="emailI.touched && emailI.invalid">Username Required</span>
+  </div>
+  <div>
+    <span>Password </span>
+    <input type="text" required name="password" id="password" ngModel #passwordI='ngModel'>
+    <span *ngIf="passwordI.touched && passwordI.invalid">Password Requrired</span>
+  </div>
+  <button type="submit">SignIn</button>
+</form>

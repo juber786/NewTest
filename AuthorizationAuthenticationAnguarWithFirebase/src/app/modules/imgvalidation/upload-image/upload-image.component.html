@@ -1,0 +1,18 @@
+<div style="margin-top: 50px;"><h2>Check File Extention Validation</h2></div>
+<form [formGroup]="uploadImageForm" (ngSubmit)="submitUploadImg()">
+    <div style="margin-bottom: 10px;">
+      <label>File Name</label>
+      <input formControlName="imageName" type="text">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label>Upload File</label>
+      <input (change)="uploadFile($event)"   type="file">
+      <span *ngIf='uploadImageForm.controls.image.errors?.imageFormat'> Image Format is not Valid</span>
+      <span *ngIf='uploadImageForm.controls.image.invalid && uploadImageForm.controls.image.touched'> Image Required</span>
+
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 50px;">
+      <button type="submit"> Submit</button>
+      <!-- <button [disabled]="uploadImageForm.invalid" type="submit"> Submit</button> -->
+    </div>
+</form>
