@@ -1,0 +1,43 @@
+
+<ng-container *ngIf='products.length !=0'>
+  <table>
+    <thead>
+      <th>Sr. No</th>
+      <th>Product Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>total</th>
+
+      <th>Action</th>
+
+    </thead>
+    <tbody>
+      <tr *ngFor='let item of products; let i=index'>
+        <th>{{i+1}}</th>
+       <th>{{item.title}}</th>
+       <th>{{item.description}}</th>
+       <th>{{item.price}}</th>
+       <th>{{item.quantity}}</th>
+       <th>{{item.total}}</th>
+       <th><button (click)="removeItem(item)">Delete</button></th>
+      </tr>
+      <tr>
+        <th colspan="2"></th>
+        <th colspan="5"> <button (click)="emptyCart()">Empty Cart</button> &nbsp; &nbsp; &nbsp;<a routerLink="/product">Shop More</a> &nbsp; &nbsp; &nbsp; <button>Checkout</button>
+          &nbsp; &nbsp; &nbsp; <span>Grand Total: {{grandTotal}}</span>
+        </th>
+      </tr>
+
+
+
+
+    </tbody>
+
+  </table>
+</ng-container>
+
+<ng-container *ngIf='products.length == 0'>
+  Product is not available in cart
+</ng-container>
+

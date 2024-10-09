@@ -1,0 +1,58 @@
+<div style="margin-top: 50px;"><h2>Password Confirm Password Is Match Validation</h2></div>
+<form #pass="ngForm" (ngSubmit)="savePass()">
+  <div class="col-md-12">
+     <div ngModelGroup="passwordGroup">
+      <div class="form-group">
+        Password
+
+        <input type="text" (input)="conPasswordx.control.updateValueAndValidity()" required class="form-control" name="password" ngModel  #passwordx="ngModel" id="password" />
+        <span class="help-block" *ngIf="passwordx.touched && passwordx.invalid">
+
+          Password is Required
+        </span>
+      </div>
+      <div class="form-group">
+        Confirm Password
+        <input type="text" appConfirmEqualValidator="password" required class="form-control" name="conPassword" ngModel #conPasswordx="ngModel" id="conPassword" />
+        <span class="help-block" *ngIf="conPasswordx.touched && conPasswordx.errors?.required">
+          Confirm Password is Required
+        </span>
+
+        <span class="help-block" *ngIf="conPasswordx.touched && conPasswordx.errors?.notEqual &&
+        !conPasswordx.errors?.required">
+          Password and Confirm Password does not match
+        </span>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div style="margin-top: 50px;"><h2>Dynamic Add / Remove Form Fields</h2></div>
+<form [formGroup]="empFrom" (ngSubmit)="empSubmit()">
+  <div style="margin-bottom: 10px;">
+    <label>Employee Name</label>
+    <input formControlName="employeeName" type="text">
+    <span *ngIf="(f.employeeName.touched && f.employeeName.invalid)">Please enter Employee Name</span>
+
+  </div>
+  <div formArrayName= "skillExp">
+    <div style="margin-bottom: 10px;" *ngFor="let skillExp of empFrom.controls.skillExp['controls']; let i=index" [formGroupName]='i'>
+      <label>Skill</label>
+      <input id="skill{{i}}" type="text" formControlName="skill">
+      <span *ngIf="(skillExpArry.controls[i].controls.skill.touched && skillExpArry.controls[i].controls.skill.invalid)">Skill is Required</span>
+
+      <label>Experience</label>
+      <input id="exp{{i}}" type="text" formControlName="exp">
+      <span *ngIf="(skillExpArry.controls[i].controls.exp.touched && skillExpArry.controls[i].controls.exp.invalid)">Experience is Required</span>
+      <button *ngIf="skillExpArry.controls.length > 1" (click)="deleteRow(i)"> Delete </button>
+    </div>
+    <button (click)="addMore()">Add More</button>
+  </div>
+
+  <div style="margin-top: 20px; margin-bottom: 50px;">
+     <button [disabled]="empFrom.invalid" type="submit"> Submit</button>
+  </div>
+</form>
+
+
